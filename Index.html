@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Sowmia!</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS variables for a vibrant and cohesive color palette */
+        :root {
+            --primary-color: #ff69b4; /* Hot pink for a fun, loving look */
+            --secondary-color: #ffb6c1; /* Light pink */
+            --text-color: #4b0082; /* Deep purple for elegance */
+            --card-background: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+            --shadow-elevation: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        /* --- Main body and heart animation background --- */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #ffb6c1 0%, #ffc0cb 100%);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Background heart animation */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            background-color: var(--primary-color);
+            transform: rotate(-45deg);
+            opacity: 0;
+            animation: moveHeart 10s linear infinite;
+        }
+        
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: inherit;
+        }
+        
+        .heart::before {
+            top: -50%;
+            left: 0;
+        }
+        
+        .heart::after {
+            top: 0;
+            left: 50%;
+        }
+
+        @keyframes moveHeart {
+            0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(315deg); opacity: 0; }
+        }
+
+        /* --- General Layout and Component Animations --- */
+        .container {
+            max-width: 90%;
+            margin: 0 auto;
+            padding: 40px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card {
+            background-color: var(--card-background);
+            border-radius: 20px;
+            box-shadow: var(--shadow-elevation);
+            padding: 30px;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 1s ease-out, transform 1s cubic-bezier(.25,.8,.25,1);
+            max-width: 600px;
+            width: 100%;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        .card.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        h1, h2 {
+            font-family: 'Dancing Script', cursive;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in-out forwards;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hero Section with unique animation */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-color);
+            padding: 20px;
+            position: relative;
+        }
+        
+        /* Music Player Card */
+        .music-player-card {
+            background: linear-gradient(45deg, #ff69b4, #ff8c00);
+            color: #fff;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        .music-player-card h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 15px;
+            filter: invert(1);
+        }
+
+        /* --- Touch Animation (heart on click) --- */
+        .touch-heart {
+            position: fixed;
+            z-index: 999;
+            pointer-events: none;
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary-color);
+            border-radius: 50% 50% 0;
+            transform: rotate(45deg);
+            animation: popHeart 1s ease-out forwards;
+        }
+        
+        @keyframes popHeart {
+            0% { transform: scale(0) rotate(45deg); opacity: 1; }
+            50% { transform: scale(1.5) rotate(45deg); opacity: 1; }
+            100% { transform: scale(1.5) rotate(45deg) translateY(-50px); opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="hearts-container"></div>
+
+    <section class="hero">
+        <h1>Happy Birthday, Sowmia!</h1>
+        <p>A day as special as you are.</p>
+    </section>
+
+    <section class="container">
+        <div class="card">
+            <h2>A heartfelt wish for you...</h2>
+            <p>
+                Dearest Sowmia, on this day, I wish you endless joy, laughter, and all the wonderful things life has to offer. May your journey be filled with beautiful moments and great adventures. You are an amazing person, and I'm so grateful to have you.
+            </p>
+            <p>
+                With all my love,
+                <br>
+                [Mubeen]
+            </p>
+        </div>
+    </section>
+    
+    <section class="container">
+        <div class="card music-player-card">
+            <h3>Our Song, just for you!</h3>
+            <audio controls loop>
+                <source src="music.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </section>
+    
+    <script>
+        // --- JavaScript for dynamic heart generation and animations ---
+        document.addEventListener("DOMContentLoaded", () => {
+            const heartsContainer = document.querySelector('.hearts-container');
+
+            // Generate a continuous stream of background hearts
+            function createBackgroundHeart() {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 5 + 5 + 's';
+                heart.style.width = Math.random() * 10 + 15 + 'px';
+                heart.style.height = heart.style.width;
+                heartsContainer.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, parseFloat(heart.style.animationDuration) * 1000);
+            }
+            setInterval(createBackgroundHeart, 200);
+
+            // Scroll-based card reveal animation
+            const cards = document.querySelectorAll('.card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            cards.forEach(card => observer.observe(card));
+
+            // Touch-based heart animation
+            document.addEventListener('click', (e) => {
+                const touchHeart = document.createElement('div');
+                touchHeart.classList.add('touch-heart');
+                
+                // Adjust position to center of the touch point
+                touchHeart.style.left = `${e.clientX - 15}px`;
+                touchHeart.style.top = `${e.clientY - 15}px`;
+
+                document.body.appendChild(touchHeart);
+                
+                setTimeout(() => {
+                    touchHeart.remove();
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
