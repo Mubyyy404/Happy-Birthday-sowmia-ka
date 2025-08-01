@@ -1,457 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, Sowmia!</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Sowmia 🎂</title>
 
-    <style>
-        /* CSS variables for a vibrant and cohesive color palette */
-        :root {
-            --primary-color: #ff69b4;
-            --secondary-color: #ffb6c1;
-            --text-color-dark: #4b0082;
-            --text-color-light: #ffffff;
-            --card-background: rgba(255, 255, 255, 0.4);
-            --shadow-elevation: 0 12px 24px rgba(0,0,0,0.3);
-        }
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
-        /* --- Main body and optimized background animation --- */
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: radial-gradient(circle at 50% 50%, #ffc0cb 0%, #ffb6c1 100%);
-            color: var(--text-color-dark);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-            min-height: 100vh;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
+    body {
+      font-family: 'Dancing Script', cursive;
+      overflow: hidden;
+      height: 100vh;
+      background: linear-gradient(270deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+      background-size: 800% 800%;
+      animation: gradientShift 20s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #fff;
+      text-shadow: 2px 2px 4px #00000080;
+    }
 
-        .particle {
-            position: absolute;
-            background-color: var(--primary-color);
-            transform: rotate(-45deg);
-            opacity: 0;
-            animation: moveParticle 15s linear infinite;
-        }
-        
-        .particle::before, .particle::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background-color: inherit;
-        }
-        
-        .particle::before { top: -50%; left: 0; }
-        .particle::after { top: 0; left: 50%; }
+    @keyframes gradientShift {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
 
-        @keyframes moveParticle {
-            0% { transform: translateY(0) rotate(-45deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            100% { transform: translateY(-100vh) rotate(315deg); opacity: 0; }
-        }
+    h1 {
+      font-size: 4rem;
+      animation: fadeIn 3s ease-in-out;
+    }
 
-        /* --- Full-screen "Tap to Begin" overlay --- */
-        #tap-to-begin-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #ffb6c1 0%, #ffc0cb 100%);
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-            transition: opacity 1s ease-out;
-        }
+    p {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      text-align: center;
+      max-width: 600px;
+      animation: fadeIn 4s ease-in-out;
+    }
 
-        #tap-to-begin-overlay h2 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3rem;
-            color: var(--text-color-dark);
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
-            animation: pulse 2s infinite alternate;
-        }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
 
-        #tap-to-begin-overlay button {
-            background-color: var(--primary-color);
-            color: var(--text-color-light);
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            border: none;
-            border-radius: 50px;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            margin-top: 20px;
-            cursor: pointer;
-            box-shadow: var(--shadow-elevation);
-            transition: transform 0.3s ease;
-        }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: floatUp 10s linear infinite;
+    }
 
-        #tap-to-begin-overlay button:hover {
-            transform: scale(1.05);
-        }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
 
-        /* --- General Layout and Component Animations --- */
-        .container {
-            max-width: 90%;
-            margin: 0 auto;
-            padding: 40px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-        }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
 
-        .card {
-            background-color: var(--card-background);
-            border-radius: 20px;
-            box-shadow: var(--shadow-elevation);
-            padding: 30px;
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1s ease-out, transform 1s cubic-bezier(.25,.8,.25,1);
-            max-width: 600px;
-            width: 100%;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-        
-        .card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
 
-        h1, h2, h3 {
-            font-family: 'Dancing Script', cursive;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-align: center;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
-        }
-        
-        h1 {
-            font-size: 3.5rem;
-            animation: pulse 2s infinite alternate;
-        }
-
-        @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.05); } }
-        
-        h2 { font-size: 2.5rem; margin-bottom: 20px; }
-        h3 { font-size: 1.8rem; margin: 0; }
-
-        p {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem; /* Slightly smaller for better wrapping */
-            line-height: 1.6;
-            text-align: center;
-            opacity: 0;
-            animation: fadeIn 1.5s ease-in-out forwards;
-            animation-delay: 1.5s;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--text-color-dark);
-            padding: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .hero h1 span {
-            opacity: 0;
-            display: inline-block;
-            animation: popIn 0.5s cubic-bezier(.68,-0.55,.27,1.55) forwards;
-        }
-        
-        @keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
-        #countdown {
-            margin-top: 20px;
-            font-size: 2rem;
-            font-family: 'Dancing Script', cursive;
-            color: var(--text-color-dark);
-            opacity: 0;
-            animation: fadeIn 1s ease-in forwards;
-            animation-delay: 2s;
-        }
-
-        .message-carousel {
-            max-width: 100%;
-            overflow-x: scroll;
-            -webkit-overflow-scrolling: touch;
-            scroll-snap-type: x mandatory;
-            display: flex;
-            gap: 20px;
-            padding-bottom: 20px;
-            box-sizing: border-box;
-            background: transparent;
-        }
-        
-        .message-carousel .card {
-            flex: 0 0 90%;
-            scroll-snap-align: center;
-            margin-bottom: 0;
-            padding: 30px 20px; /* Adjusted padding */
-        }
-        
-        .music-player-card {
-            background: linear-gradient(45deg, #ff69b4, #ff8c00);
-            color: var(--text-color-light);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-            text-align: center;
-            padding: 30px;
-            border-radius: 20px;
-        }
-        
-        #player-ui {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        #player-ui button {
-            background: none;
-            border: none;
-            color: var(--text-color-light);
-            font-size: 2.5rem;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        
-        #player-ui button:hover { transform: scale(1.1); }
-        #player-ui i { pointer-events: none; }
-        
-        #waveform-container {
-            position: relative;
-            width: 100%;
-            height: 50px;
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .waveform-bar {
-            width: 3px;
-            height: 5px;
-            background-color: var(--text-color-light);
-            border-radius: 2px;
-            animation: waveform 0.8s ease-in-out infinite alternate;
-        }
-        
-        .waveform-bar:nth-child(2n) { animation-delay: 0.2s; }
-        .waveform-bar:nth-child(3n) { animation-delay: 0.4s; }
-        
-        @keyframes waveform { from { height: 5px; } to { height: 40px; } }
-    </style>
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div id="tap-to-begin-overlay">
-        <h2>Happy Birthday, Sowmia!</h2>
-        <button id="tap-button">Tap to Begin</button>
-    </div>
 
-    <div class="particles"></div>
+  <h1>🎉 Happy Birthday Sowmia 🎉</h1>
+  <p>Wishing you endless joy, love, and blessings on your special day. You deserve the world and more!</p>
 
-    <section class="hero" style="display: none;">
-        <h1 id="hero-title"></h1>
-        <p>A day as special as you are.</p>
-        <div id="countdown"></div>
-    </section>
+  <!-- Background music -->
+  <audio autoplay loop>
+    <source src="music.mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
+  </audio>
 
-    <section class="container" style="display: none;">
-        <h2>From everyone who loves you...</h2>
-        <div id="message-carousel" class="message-carousel"></div>
-    </section>
-    
-    <section class="container" style="display: none;">
-        <div class="card music-player-card">
-            <h3>Our Song, just for you!</h3>
-            <div id="player-ui">
-                <button id="play-button"><i class="fa-solid fa-play"></i></button>
-                <button id="pause-button" style="display: none;"><i class="fa-solid fa-pause"></i></button>
-            </div>
-            <div id="waveform-container" style="display:none;">
-                <div class="waveform-bar"></div>
-                <div class="waveform-bar"></div>
-                <div class="waveform-bar"></div>
-                <div class="waveform-bar"></div>
-                <div class="waveform-bar"></div>
-                <div class="waveform-bar"></div>
-                <div class="waveform-bar"></div>
-                <div class="waveform-bar"></div>
-                <div class="waveform-bar"></div>
-                <div class="waveform-bar"></div>
-            </div>
-            <audio id="birthday-song" src="music.mp3" loop></audio>
-        </div>
-    </section>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const tapOverlay = document.getElementById('tap-to-begin-overlay');
-            const tapButton = document.getElementById('tap-button');
-            const sections = document.querySelectorAll('section');
-            
-            const particlesContainer = document.querySelector('.particles');
-            const heroTitle = document.getElementById('hero-title');
-            const messagesContainer = document.getElementById('message-carousel');
-            const birthdayDate = new Date('August 1, 2025 00:00:00');
-            const song = document.getElementById('birthday-song');
-            const playBtn = document.getElementById('play-button');
-            const pauseBtn = document.getElementById('pause-button');
-            const waveform = document.getElementById('waveform-container');
+  <!-- Floating hearts -->
+  <script>
+    const heartCount = 40;
+    for (let i = 0; i < heartCount; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 10 + 5) + "s";
+      heart.style.opacity = Math.random();
+      document.body.appendChild(heart);
+    }
+  </script>
 
-            // --- Advanced Features ---
-
-            // 1. Optimized Particle Generator
-            function createParticle() {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                particle.style.left = Math.random() * 100 + 'vw';
-                particle.style.animationDuration = Math.random() * 10 + 5 + 's';
-                particle.style.width = Math.random() * 10 + 15 + 'px';
-                particle.style.height = particle.style.width;
-                particlesContainer.appendChild(particle);
-                setTimeout(() => particle.remove(), parseFloat(particle.style.animationDuration) * 1000);
-            }
-            let particleInterval;
-
-            // 2. Dynamic Message Generation
-            const messages = [
-                {
-                    title: "A heartfelt wish for you...",
-                    text: "Dearest Sowmia, on this day, I wish you endless joy, laughter, and all the wonderful things life has to offer. May your journey be filled with beautiful moments and great adventures. You are an amazing person, and I'm so grateful to have you.",
-                    signature: "Mubeen"
-                },
-                {
-                    title: "Happy Birthday from a friend!",
-                    text: "Wishing you a day as incredible as you are! May your year be full of success, happiness, and unforgettable moments. Hope you have a wonderful celebration and a fantastic year ahead.",
-                    signature: "Your Friend"
-                },
-                {
-                    title: "To the best sister!",
-                    text: "Happy birthday, Sowmia! You've always been my role model. Thank you for all the lessons, laughs, and support. Celebrating you today and always! Stay awesome!",
-                    signature: "Your Sister"
-                }
-            ];
-
-            messages.forEach(msg => {
-                const card = document.createElement('div');
-                card.classList.add('card');
-                card.innerHTML = `
-                    <h3>${msg.title}</h3>
-                    <p>${msg.text}</p>
-                    <p><strong>- ${msg.signature}</strong></p>
-                `;
-                messagesContainer.appendChild(card);
-            });
-            const cards = document.querySelectorAll('.card');
-
-            // 3. Scroll-based card reveal animation
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.5 });
-            cards.forEach(card => observer.observe(card));
-
-            // 4. Custom Music Player Controls
-            playBtn.addEventListener('click', () => {
-                song.play();
-                playBtn.style.display = 'none';
-                pauseBtn.style.display = 'inline-block';
-                waveform.style.display = 'flex';
-            });
-            pauseBtn.addEventListener('click', () => {
-                song.pause();
-                pauseBtn.style.display = 'none';
-                playBtn.style.display = 'inline-block';
-                waveform.style.display = 'none';
-            });
-
-            // 5. "Tap to Begin" Logic
-            tapButton.addEventListener('click', () => {
-                tapOverlay.style.opacity = '0';
-                setTimeout(() => {
-                    tapOverlay.style.display = 'none';
-                    sections.forEach(section => section.style.display = 'flex');
-
-                    // Start particles and other animations
-                    particleInterval = setInterval(createParticle, 200);
-
-                    const titleText = "Happy Birthday, Sowmia 😊!";
-                    titleText.split('').forEach((char, index) => {
-                        const span = document.createElement('span');
-                        span.textContent = char;
-                        span.style.animationDelay = `${index * 0.1}s`;
-                        heroTitle.appendChild(span);
-                    });
-
-                    // Countdown timer
-                    const countdownEl = document.getElementById('countdown');
-                    function updateCountdown() {
-                        const now = new Date();
-                        const diff = birthdayDate.getTime() - now.getTime();
-                        if (diff > 0) {
-                            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-                            countdownEl.innerHTML = `Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-                        } else {
-                            countdownEl.textContent = "Happy Birthday!";
-                            countdownEl.style.animation = "pulse 2s infinite";
-                        }
-                    }
-                    setInterval(updateCountdown, 1000);
-
-                    // Autoplay music
-                    song.play().catch(e => console.log("Autoplay failed:", e));
-                    playBtn.style.display = 'none';
-                    pauseBtn.style.display = 'inline-block';
-                    waveform.style.display = 'flex';
-                }, 1000);
-            });
-        });
-    </script>
 </body>
-    </html>
-    
+</html>
