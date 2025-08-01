@@ -8,22 +8,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
         /* CSS variables for a vibrant and cohesive color palette */
         :root {
-            --primary-color: #ff69b4; /* Hot pink for a fun, loving look */
+            --primary-color: #ff69b4; /* Hot pink */
             --secondary-color: #ffb6c1; /* Light pink */
-            --text-color: #4b0082; /* Deep purple for elegance */
-            --card-background: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+            --text-color-dark: #4b0082; /* Deep purple */
+            --text-color-light: #ffffff; /* White */
+            --card-background: rgba(255, 255, 255, 0.4); /* Glassmorphism effect */
             --shadow-elevation: 0 8px 16px rgba(0,0,0,0.2);
         }
 
-        /* --- Main body and heart animation background --- */
+        /* --- Main body and advanced background animation --- */
         body {
             font-family: 'Montserrat', sans-serif;
             background: linear-gradient(135deg, #ffb6c1 0%, #ffc0cb 100%);
-            color: var(--text-color);
+            color: var(--text-color-dark);
             margin: 0;
             padding: 0;
             line-height: 1.6;
@@ -31,9 +34,9 @@
             overflow-y: auto;
             position: relative;
             min-height: 100vh;
+            perspective: 1px; /* Enable 3D perspective for parallax */
         }
-
-        /* Background heart animation */
+        
         .hearts-container {
             position: fixed;
             top: 0;
@@ -45,12 +48,15 @@
             z-index: -1;
         }
 
-        .heart {
+        .heart, .confetti {
             position: absolute;
+            opacity: 0;
+            animation: backgroundElement 15s linear infinite;
+        }
+
+        .heart {
             background-color: var(--primary-color);
             transform: rotate(-45deg);
-            opacity: 0;
-            animation: moveHeart 10s linear infinite;
         }
         
         .heart::before, .heart::after {
@@ -62,19 +68,20 @@
             background-color: inherit;
         }
         
-        .heart::before {
-            top: -50%;
-            left: 0;
-        }
-        
-        .heart::after {
-            top: 0;
-            left: 50%;
+        .heart::before { top: -50%; left: 0; }
+        .heart::after { top: 0; left: 50%; }
+
+        .confetti {
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            transform: rotate(0);
+            width: 10px; height: 10px;
         }
 
-        @keyframes moveHeart {
-            0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(315deg); opacity: 0; }
+        @keyframes backgroundElement {
+            0% { transform: translateY(0vh) rotate(0); opacity: 0; }
+            10% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
         }
 
         /* --- General Layout and Component Animations --- */
@@ -85,6 +92,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            z-index: 2;
         }
 
         .card {
@@ -94,25 +103,24 @@
             padding: 30px;
             margin-bottom: 30px;
             opacity: 0;
-            transform: scale(0.8);
+            transform: scale(0.9) translateY(50px);
             transition: opacity 1s ease-out, transform 1s cubic-bezier(.25,.8,.25,1);
             max-width: 600px;
             width: 100%;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
         
         .card.visible {
             opacity: 1;
-            transform: scale(1);
+            transform: scale(1) translateY(0);
         }
 
-        h1, h2 {
+        h1, h2, h3 {
             font-family: 'Dancing Script', cursive;
             font-weight: 700;
             color: var(--primary-color);
             text-align: center;
-            margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         
@@ -126,9 +134,8 @@
             to { transform: scale(1.05); }
         }
         
-        h2 {
-            font-size: 2.2rem;
-        }
+        h2 { font-size: 2.2rem; margin-bottom: 20px; }
+        h3 { font-size: 1.5rem; margin: 0; }
 
         p {
             font-size: 1.1rem;
@@ -139,12 +146,9 @@
             animation-delay: 1.5s;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Hero Section with unique animation */
+        /* --- Hero Section with advanced text animation and countdown --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -152,36 +156,93 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: var(--text-color);
+            color: var(--text-color-dark);
             padding: 20px;
             position: relative;
+            transform-style: preserve-3d; /* For parallax effect on hero text */
+            z-index: 1;
         }
         
-        /* Music Player Card */
+        .hero h1 span {
+            opacity: 0;
+            display: inline-block;
+            animation: popIn 0.5s cubic-bezier(.68,-0.55,.27,1.55) forwards;
+        }
+        
+        @keyframes popIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        #countdown {
+            margin-top: 20px;
+            font-size: 1.8rem;
+            font-family: 'Dancing Script', cursive;
+            color: var(--text-color-dark);
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+            animation-delay: 2s;
+        }
+
+        /* --- Multi-Message Carousel --- */
+        .message-carousel {
+            max-width: 100%;
+            overflow-x: scroll;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            display: flex;
+            gap: 20px;
+            padding-bottom: 20px;
+            box-sizing: border-box;
+            background: transparent;
+        }
+        
+        .message-carousel .card {
+            flex: 0 0 90%;
+            scroll-snap-align: center;
+            margin-bottom: 0;
+            padding: 40px 20px;
+        }
+
+        /* --- Custom Music Player UI --- */
         .music-player-card {
             background: linear-gradient(45deg, #ff69b4, #ff8c00);
-            color: #fff;
+            color: var(--text-color-light);
             box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            text-align: center;
+            padding: 30px;
+            border-radius: 20px;
         }
         
-        .music-player-card h3 {
-            margin: 0;
-            font-size: 1.5rem;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            color: #fff;
+        #player-ui {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
         }
-
-        audio {
-            width: 100%;
-            margin-top: 15px;
-            filter: invert(1);
+        
+        #player-ui button {
+            background: none;
+            border: none;
+            color: var(--text-color-light);
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
-
+        
+        #player-ui button:hover {
+            transform: scale(1.1);
+        }
+        
+        #player-ui i {
+            pointer-events: none; /* Allows click on button, not icon */
+        }
+        
         /* --- Touch Animation (heart on click) --- */
         .touch-heart {
             position: fixed;
-            z-index: 999;
+            z-index: 9999;
             pointer-events: none;
             width: 30px;
             height: 30px;
@@ -196,7 +257,6 @@
             50% { transform: scale(1.5) rotate(45deg); opacity: 1; }
             100% { transform: scale(1.5) rotate(45deg) translateY(-50px); opacity: 0; }
         }
-
     </style>
 </head>
 <body>
@@ -204,57 +264,85 @@
     <div class="hearts-container"></div>
 
     <section class="hero">
-        <h1>Happy Birthday, Sowmia 😊!</h1>
+        <h1 id="hero-title"></h1>
         <p>A day as special as you are.</p>
+        <div id="countdown"></div>
     </section>
 
     <section class="container">
-        <div class="card">
-            <h2>A heartfelt wish for you...</h2>
-            <p>
-                Dearest Sowmia, on this day, I wish you endless joy, laughter, and all the wonderful things life has to offer. May your journey be filled with beautiful moments and great adventures. You are an amazing person, and I'm so grateful to have you.
-            </p>
-            <p>
-                With all my love,
-                <br>
-                [Mubeen]
-            </p>
+        <h2>From everyone who loves you...</h2>
+        <div class="message-carousel">
+            <div class="card">
+                <h3>A heartfelt wish for you...</h3>
+                <p>
+                    Dearest Sowmia, on this day, I wish you endless joy, laughter, and all the wonderful things life has to offer. May your journey be filled with beautiful moments and great adventures. You are an amazing person, and I'm so grateful to have you.
+                </p>
+                <p>
+                    With all my love,<br>
+                    [Mubeen]
+                </p>
+            </div>
+            
+            <div class="card">
+                <h3>Happy Birthday from me!</h3>
+                <p>
+                    Wishing you a day as incredible as you are! May your year be full of success and happiness. Hope you have a wonderful celebration!
+                </p>
+                <p>
+                    Love,<br>
+                    [Friend's Name]
+                </p>
+            </div>
+            
+            <div class="card">
+                <h3>To the best sister!</h3>
+                <p>
+                    Happy birthday, Sowmia! You've always been my role model. Thank you for all the lessons, laughs, and support. Celebrating you today and always!
+                </p>
+                <p>
+                    All the best,<br>
+                    [Another Name]
+                </p>
+            </div>
         </div>
     </section>
     
     <section class="container">
         <div class="card music-player-card">
             <h3>Our Song, just for you!</h3>
-            <audio controls loop>
-                <source src="music.mp3.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
+            <div id="player-ui">
+                <button id="play-button"><i class="fa-solid fa-play"></i></button>
+                <button id="pause-button" style="display: none;"><i class="fa-solid fa-pause"></i></button>
+            </div>
+            <audio id="birthday-song" src="music.mp3" loop></audio>
         </div>
     </section>
     
     <script>
-        // --- JavaScript for dynamic heart generation and animations ---
+        // --- JavaScript for dynamic content and animations ---
         document.addEventListener("DOMContentLoaded", () => {
             const heartsContainer = document.querySelector('.hearts-container');
+            const heroTitle = document.getElementById('hero-title');
+            const cards = document.querySelectorAll('.card');
+            const birthdayDate = new Date('August 1, 2025 00:00:00'); // Set Sowmia's birthday here!
 
-            // Generate a continuous stream of background hearts
-            function createBackgroundHeart() {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDuration = Math.random() * 5 + 5 + 's';
-                heart.style.width = Math.random() * 10 + 15 + 'px';
-                heart.style.height = heart.style.width;
-                heartsContainer.appendChild(heart);
+            // Advanced Background Element Generator
+            function createBackgroundElement() {
+                const isHeart = Math.random() > 0.5;
+                const el = document.createElement('div');
+                el.classList.add(isHeart ? 'heart' : 'confetti');
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.animationDuration = Math.random() * 8 + 7 + 's';
+                el.style.width = Math.random() * 10 + 15 + 'px';
+                if (!isHeart) el.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 75%)`;
+                el.style.height = el.style.width;
+                heartsContainer.appendChild(el);
 
-                setTimeout(() => {
-                    heart.remove();
-                }, parseFloat(heart.style.animationDuration) * 1000);
+                setTimeout(() => el.remove(), parseFloat(el.style.animationDuration) * 1000);
             }
-            setInterval(createBackgroundHeart, 200);
+            setInterval(createBackgroundElement, 100);
 
             // Scroll-based card reveal animation
-            const cards = document.querySelectorAll('.card');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -263,25 +351,62 @@
                     }
                 });
             }, { threshold: 0.2 });
-
             cards.forEach(card => observer.observe(card));
 
             // Touch-based heart animation
             document.addEventListener('click', (e) => {
                 const touchHeart = document.createElement('div');
                 touchHeart.classList.add('touch-heart');
-                
-                // Adjust position to center of the touch point
                 touchHeart.style.left = `${e.clientX - 15}px`;
                 touchHeart.style.top = `${e.clientY - 15}px`;
-
                 document.body.appendChild(touchHeart);
+                setTimeout(() => touchHeart.remove(), 1000);
+            });
+
+            // Advanced text animation for hero title
+            const titleText = "Happy Birthday, Sowmia 😊!";
+            titleText.split('').forEach((char, index) => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.style.animationDelay = `${index * 0.1}s`;
+                heroTitle.appendChild(span);
+            });
+
+            // Countdown timer to the birthday
+            const countdownEl = document.getElementById('countdown');
+            function updateCountdown() {
+                const now = new Date();
+                const diff = birthdayDate.getTime() - now.getTime();
                 
-                setTimeout(() => {
-                    touchHeart.remove();
-                }, 1000);
+                if (diff > 0) {
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                    countdownEl.innerHTML = `Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+                } else {
+                    countdownEl.textContent = "Happy Birthday!";
+                }
+            }
+            setInterval(updateCountdown, 1000);
+
+            // Custom Music Player Controls
+            const song = document.getElementById('birthday-song');
+            const playBtn = document.getElementById('play-button');
+            const pauseBtn = document.getElementById('pause-button');
+
+            playBtn.addEventListener('click', () => {
+                song.play();
+                playBtn.style.display = 'none';
+                pauseBtn.style.display = 'inline-block';
+            });
+            pauseBtn.addEventListener('click', () => {
+                song.pause();
+                pauseBtn.style.display = 'none';
+                playBtn.style.display = 'inline-block';
             });
         });
     </script>
 </body>
-</html>
+                    </html>
+    
