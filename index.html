@@ -1,123 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Sowmia 🎂</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎉 Happy Birthday Sowmia 🎉</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* Global Variables and Core Styles */
+    :root {
+      --primary-color: #ff0080;
+      --secondary-color: #e60073;
+      --bg-gradient-1: #0f0c29;
+      --bg-gradient-2: #302b63;
+      --bg-gradient-3: #24243e;
+      --text-color: white;
     }
 
     body {
-      font-family: 'Dancing Script', cursive;
+      margin: 0;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+      color: var(--text-color);
+      background: linear-gradient(-45deg, var(--bg-gradient-1), var(--bg-gradient-2), var(--bg-gradient-3));
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
       overflow: hidden;
-      height: 100vh;
-      background: linear-gradient(270deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
-      background-size: 800% 800%;
-      animation: gradientShift 20s ease infinite;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* --- The Magic Begins Here --- */
+    /* Full-screen intro screen for user-friendly music autoplay */
+    #intro-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(-45deg, var(--bg-gradient-1), var(--bg-gradient-2), var(--bg-gradient-3));
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      transition: opacity 1s ease-out;
+    }
+
+    #intro-overlay h1 {
+      font-family: 'Sacramento', cursive;
+      font-size: 3em;
+      text-align: center;
+      margin-top: 0;
+      animation: pulse 2s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
+    }
+
+    #intro-overlay button {
+      background: var(--primary-color);
+      border: none;
+      border-radius: 25px;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 15px var(--primary-color);
+    }
+
+    #intro-overlay button:hover {
+      transform: scale(1.05);
+      background: var(--secondary-color);
+    }
+
+    /* Animated floating hearts */
+    .hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+    }
+
+    .hearts.visible {
+        opacity: 1;
+    }
+
+    .hearts span {
+      position: absolute;
+      display: block;
+      animation: floatHearts 15s linear infinite;
+      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center;
+      background-size: contain;
+      opacity: 0;
+    }
+    
+    @keyframes floatHearts {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      20% { opacity: 0.8; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+
+    /* Main content container */
+    .content {
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+      z-index: 1;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .content.visible {
+        opacity: 1;
+    }
+
+    .content h1 {
+      font-size: 3em;
+      margin: 80px 0 10px;
+      font-family: 'Sacramento', cursive;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    }
+
+    .content .subtext {
+      font-size: 1.3em;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    
+    /* Music controls with better UI */
+    .music-controls {
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      color: #fff;
-      text-shadow: 2px 2px 4px #00000080;
+      margin: 20px auto;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      padding: 10px 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      backdrop-filter: blur(5px);
     }
 
-    @keyframes gradientShift {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+    .music-controls button {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 1.5em;
+        cursor: pointer;
+        transition: transform 0.3s;
     }
 
-    h1 {
-      font-size: 4rem;
-      animation: fadeIn 3s ease-in-out;
+    .music-controls button:hover {
+        transform: scale(1.1);
     }
 
-    p {
-      font-size: 1.5rem;
-      margin-top: 20px;
-      text-align: center;
-      max-width: 600px;
-      animation: fadeIn 4s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: pink;
-      transform: rotate(45deg);
-      animation: floatUp 10s linear infinite;
-    }
-
-    .heart::before,
-    .heart::after {
-      content: "";
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: pink;
-      border-radius: 50%;
-    }
-
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
-
-    .heart::after {
-      left: -10px;
-      top: 0;
-    }
-
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) rotate(45deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh) rotate(45deg);
+    /* Countdown Timer and Message */
+    .card {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(5px);
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
         opacity: 0;
-      }
+        transform: scale(0.9);
+        transition: opacity 0.8s, transform 0.8s;
+        max-width: 90%;
+    }
+    
+    .card.visible {
+        opacity: 1;
+        transform: scale(1);
+    }
+    
+    .card h2 {
+        font-family: 'Sacramento', cursive;
+        font-size: 2em;
+        margin-bottom: 10px;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    
+    .card p {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1em;
+        line-height: 1.5;
+    }
+
+    /* Footer */
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      text-align: center;
+      width: 100%;
+      font-size: 0.9em;
+      opacity: 0.6;
     }
   </style>
 </head>
 <body>
 
-  <h1>🎉 Happy Birthday Sowmia 🎉</h1>
-  <p>Wishing you endless joy, love, and blessings on your special day. You deserve the world and more!</p>
+  <div id="intro-overlay">
+    <h1>Happy Birthday Sowmia 🎂</h1>
+    <button id="start-button">🎵 Tap to Begin 🎵</button>
+  </div>
 
-  <!-- Background music -->
-  <audio autoplay loop>
-    <source src="music.mp3" type="audio/mp3">
-    Your browser does not support the audio tag.
-  </audio>
+  <div class="hearts"></div>
 
-  <!-- Floating hearts -->
+  <div class="content">
+    <h1 id="main-title">Happy Birthday Sowmia!</h1>
+    <div class="subtext">Wishing you endless smiles, laughter, and unforgettable memories 💖</div>
+    
+    <div class="card" id="countdown-card">
+        <h2>Birthday Countdown</h2>
+        <p id="countdown"></p>
+    </div>
+
+    <div class="card" id="message-card">
+        <h2>A special message just for you...</h2>
+        <p>On this day, I'm celebrating the wonderful person you are. Thank you for all the joy you bring into the world. May your year be filled with love and happiness!</p>
+        <p>— Made with 💝 by your Cyber Buddy</p>
+    </div>
+
+    <div class="music-controls" style="display: none;">
+        <button id="toggle-music-btn">
+            <i id="music-icon" class="fa-solid fa-pause"></i>
+        </button>
+    </div>
+  </div>
+
+  <audio id="bgmusic" src="music.mp3" loop></audio>
+
   <script>
-    const heartCount = 40;
-    for (let i = 0; i < heartCount; i++) {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (Math.random() * 10 + 5) + "s";
-      heart.style.opacity = Math.random();
-      document.body.appendChild(heart);
-    }
-  </script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const introOverlay = document.getElementById('intro-overlay');
+      const startButton = document.getElementById('start-button');
+      const heartsContainer = document.querySelector('.hearts');
+      const content = document.querySelector('.content');
+      const bgmusic = document.getElementById('bgmusic');
+      const musicControls = document.querySelector('.music-controls');
+      const toggleMusicBtn = document.getElementById('toggle-music-btn');
+      const musicIcon = document.getElementById('music-icon');
+      const countdownCard = document.getElementById('countdown-card');
+      const messageCard = document.getElementById('message-card');
+      const countdownEl = document.getElementById('countdown');
+      const mainTitle = document.getElementById('main-title');
+      const birthday = new Date('August 1, 2025 00:00:00'); // SET SOWMIA'S BIRTHDAY HERE!
 
+      // --- 1. User-Friendly Intro and Content Reveal ---
+      startButton.addEventListener('click', () => {
+        bgmusic.play().catch(e => console.error("Autoplay failed:", e));
+        introOverlay.style.opacity = '0';
+        
+        setTimeout(() => {
+          introOverlay.style.display = 'none';
+          heartsContainer.classList.add('visible');
+          content.classList.add('visible');
+          musicControls.style.display = 'flex';
+          messageCard.classList.add('visible');
+          countdownCard.classList.add('visible');
+        }, 1000);
+      });
+
+      // --- 2. Advanced Heart Animation Generator ---
+      function createHeart() {
+        const heart = document.createElement("span");
+        const size = Math.random() * 15 + 10;
+        heart.style.width = size + "px";
+        heart.style.height = size + "px";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 10) + 5 + "s";
+        heart.style.animationDelay = Math.random() * 5 + "s";
+        heart.style.opacity = Math.random() * 0.7 + 0.3;
+        heartsContainer.appendChild(heart);
+
+        setTimeout(() => heart.remove(), parseFloat(heart.style.animationDuration) * 1000);
+      }
+      setInterval(createHeart, 250);
+
+      // --- 3. Dynamic Music Control UI ---
+      toggleMusicBtn.addEventListener('click', () => {
+        if (bgmusic.paused) {
+          bgmusic.play();
+          musicIcon.classList.remove('fa-play');
+          musicIcon.classList.add('fa-pause');
+        } else {
+          bgmusic.pause();
+          musicIcon.classList.remove('fa-pause');
+          musicIcon.classList.add('fa-play');
+        }
+      });
+      
+      // --- 4. Birthday Countdown Timer ---
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = birthday.getTime() - now;
+
+        if (distance > 0) {
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          countdownEl.innerHTML = `${days} days, ${hours} hours, ${minutes} mins, ${seconds} secs`;
+        } else {
+          countdownEl.innerHTML = "It's your birthday! 🎈";
+          countdownCard.classList.add('pulse'); // Add a visual effect for the birthday
+        }
+      }
+      setInterval(updateCountdown, 1000);
+    });
+  </script>
 </body>
-</html>
+  </html>
+  
