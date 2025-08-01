@@ -17,6 +17,11 @@
       --text-color: white;
     }
 
+    /* Base setup for smooth scrolling and clean font rendering */
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -25,13 +30,11 @@
       background: linear-gradient(-45deg, var(--bg-gradient-1), var(--bg-gradient-2), var(--bg-gradient-3));
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
-      overflow: hidden;
+      position: relative;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      position: relative;
     }
 
     @keyframes gradientBG {
@@ -40,8 +43,7 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* --- The Magic Begins Here --- */
-    /* Full-screen intro screen for user-friendly music autoplay */
+    /* --- Full-screen intro screen for user-friendly music autoplay --- */
     #intro-overlay {
       position: fixed;
       top: 0;
@@ -91,7 +93,7 @@
 
     /* Animated floating hearts */
     .hearts {
-      position: absolute;
+      position: fixed;
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -119,18 +121,21 @@
       100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
     }
 
-    /* Main content container */
+    /* Main content container is now the scrollable part */
     .content {
+      width: 100%;
+      max-width: 600px;
+      padding-top: 50px;
+      padding-bottom: 50px;
       text-align: center;
       opacity: 0;
       transition: opacity 1s ease-in;
       z-index: 1;
-      transform-style: preserve-3d;
-      will-change: transform;
+      will-change: opacity;
     }
 
     .content.visible {
-        opacity: 1;
+      opacity: 1;
     }
 
     .content h1 {
@@ -173,23 +178,23 @@
         transform: scale(1.1);
     }
 
-    /* Countdown Timer and Message */
+    /* Countdown Timer and Message Cards */
     .card {
         background: rgba(255, 255, 255, 0.2);
         backdrop-filter: blur(5px);
         padding: 20px;
-        margin-top: 20px;
+        margin: 20px auto;
         border-radius: 15px;
         box-shadow: 0 0 15px rgba(0,0,0,0.2);
         opacity: 0;
-        transform: scale(0.9);
+        transform: translateY(20px);
         transition: opacity 0.8s, transform 0.8s;
         max-width: 90%;
     }
     
     .card.visible {
         opacity: 1;
-        transform: scale(1);
+        transform: translateY(0);
     }
     
     .card h2 {
@@ -207,8 +212,8 @@
 
     /* Footer */
     .footer {
-      position: absolute;
-      bottom: 20px;
+      position: relative;
+      margin-top: 50px;
       text-align: center;
       width: 100%;
       font-size: 0.9em;
@@ -225,7 +230,7 @@
 
   <div class="hearts"></div>
 
-  <div class="content">
+  <div class="content" style="opacity: 0;">
     <h1 id="main-title">Happy Birthday Sowmia!</h1>
     <div class="subtext">Wishing you endless smiles, laughter, and unforgettable memories 💖</div>
     
@@ -263,7 +268,8 @@
       const messageCard = document.getElementById('message-card');
       const countdownEl = document.getElementById('countdown');
       const mainTitle = document.getElementById('main-title');
-      const birthday = new Date('August 1, 2025 00:00:00'); // SET SOWMIA'S BIRTHDAY HERE!
+      
+      const birthday = new Date('August 1, 2026 00:00:00'); // CHANGE THIS DATE!
 
       // --- 1. User-Friendly Intro and Content Reveal ---
       startButton.addEventListener('click', () => {
@@ -273,8 +279,10 @@
         setTimeout(() => {
           introOverlay.style.display = 'none';
           heartsContainer.classList.add('visible');
-          content.classList.add('visible');
+          content.style.opacity = '1';
           musicControls.style.display = 'flex';
+          
+          // Animate cards on reveal
           messageCard.classList.add('visible');
           countdownCard.classList.add('visible');
         }, 1000);
@@ -322,12 +330,11 @@
           countdownEl.innerHTML = `${days} days, ${hours} hours, ${minutes} mins, ${seconds} secs`;
         } else {
           countdownEl.innerHTML = "It's your birthday! 🎈";
-          countdownCard.classList.add('pulse'); // Add a visual effect for the birthday
         }
       }
       setInterval(updateCountdown, 1000);
     });
   </script>
 </body>
-  </html>
-  
+                                                           </html>
+                                                           
