@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raja Rice & Grocery</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<header>Raja Rice & Grocery</header>
+
+<nav>
+  <input type="text" placeholder="Search products..." id="searchBar">
+  <button onclick="openCart()">View Cart (<span id="cartCount">0</span>)</button>
+</nav>
+
+<div id="offerPopup">
+  <h4>Special Offer!</h4>
+  <p>Get 10% off on orders above ₹1000. Limited time!</p>
+  <button onclick="closeOffer()">Close</button>
+</div>
+
+<div class="container" id="productContainer">
+  <div class="card" data-name="Basmati Rice" data-price="500">
+    <img src="https://via.placeholder.com/250x200.png?text=Rice" alt="Rice">
+    <h3>Basmati Rice</h3>
+    <p>5kg pack. ₹500</p>
+    <button onclick="addToCart('Basmati Rice',500)">Add to Cart</button>
+  </div>
+  <div class="card" data-name="Sunflower Oil" data-price="200">
+    <img src="https://via.placeholder.com/250x200.png?text=Oil" alt="Oil">
+    <h3>Sunflower Oil</h3>
+    <p>1L bottle. ₹200</p>
+    <button onclick="addToCart('Sunflower Oil',200)">Add to Cart</button>
+  </div>
+  <div class="card" data-name="White Sugar" data-price="150">
+    <img src="https://via.placeholder.com/250x200.png?text=Sugar" alt="Sugar">
+    <h3>White Sugar</h3>
+    <p>2kg pack. ₹150</p>
+    <button onclick="addToCart('White Sugar',150)">Add to Cart</button>
+  </div>
+  <div class="card" data-name="Mixed Spices" data-price="250">
+    <img src="https://via.placeholder.com/250x200.png?text=Spices" alt="Spices">
+    <h3>Mixed Spices</h3>
+    <p>500g pack. ₹250</p>
+    <button onclick="addToCart('Mixed Spices',250)">Add to Cart</button>
+  </div>
+</div>
+
+<div id="cartModal">
+  <div id="cartContent">
+    <button class="close" onclick="closeCart()">X</button>
+    <h2>Your Cart</h2>
+    <table id="cartTable">
+      <thead><tr><th>Item</th><th>Price</th><th>Qty</th><th>Total</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <p id="totalAmount"></p>
+    <p>Your unique order code: <input type="text" id="orderCode" readonly></p>
+    <button id="payNowBtn">Pay Now via UPI</button>
+    <p id="paymentStatus" style="color:green;font-weight:bold;"></p>
+    <div id="bill" style="display:none;"></div>
+    <button id="downloadBtn" style="display:none;" onclick="downloadPDF()">Download Bill as PDF</button>
+  </div>
+</div>
+
+<div id="contactSection">
+  <h3>Contact Us</h3>
+  <p>Phone: +91-9876543210</p>
+  <p>Email: support@rajaricegrocery.com</p>
+  <p>Address: 123 Market Street, Your City, India</p>
+</div>
+
+<footer>&copy; 2025 Raja Rice & Grocery. All Rights Reserved.</footer>
+
+<script src="cart.js"></script>
+<script src="bill.js"></script>
+
+</body>
+</html>
