@@ -1,12 +1,10 @@
-/* Grocery theme styles */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif;}
 body{background:#f7fff7;color:#333;}
-header{background:#388e3c;color:#fff;padding:25px;text-align:center;font-size:2em;font-weight:bold;position:sticky;top:0;z-index:1000;}
+header{background:#388e3c;color:#fff;padding:25px;text-align:center;font-size:2em;font-weight:bold;}
 nav{display:flex;justify-content:center;align-items:center;padding:10px 0;background:#66bb6a;gap:10px;flex-wrap:wrap;}
 nav input[type="text"]{padding:8px 12px;width:250px;border:none;border-radius:20px;outline:none;transition:.3s;}
-nav input[type="text"]:focus{width:350px;box-shadow:0 0 8px #fff;}
-nav button{padding:8px 16px;border:none;background:#fff;color:#388e3c;font-weight:bold;border-radius:20px;cursor:pointer;transition:.3s;}
-nav button:hover{background:#388e3c;color:#fff;}
+nav button, .get-bill-btn{padding:8px 16px;border:none;background:#fff;color:#388e3c;font-weight:bold;border-radius:20px;cursor:pointer;transition:.3s;text-decoration:none;}
+nav button:hover, .get-bill-btn:hover{background:#388e3c;color:#fff;}
 .container{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px;padding:40px 20px;}
 .card{background:#fff9f0;border-radius:15px;padding:20px;text-align:center;box-shadow:0 8px 15px rgba(0,0,0,0.1);transition:transform .3s,box-shadow .3s;}
 .card:hover{transform:translateY(-8px);box-shadow:0 12px 20px rgba(0,0,0,0.2);}
@@ -24,6 +22,5 @@ footer{background:#388e3c;color:#fff;text-align:center;padding:15px;margin-top:2
 #cartContent button.close{position:absolute;top:10px;right:10px;background:#388e3c;color:#fff;border:none;padding:5px 10px;border-radius:10px;cursor:pointer;}
 #cartContent button.close:hover{background:#66bb6a;}
 #totalAmount{font-weight:bold;font-size:1.1em;text-align:right;margin-top:10px;}
-#offerPopup{position:fixed;top:20px;right:20px;background:#ffeb3b;color:#333;padding:20px;border-radius:15px;box-shadow:0 8px 15px rgba(0,0,0,.2);z-index:3000;display:none;}
-#contactSection{background:#e8f5e9;padding:20px;margin:40px 20px;border-radius:15px;}
-#contactSection h3{color:#388e3c;margin-bottom:10px;}
+#get-bill input{padding:10px;width:70%;margin-right:10px;}
+                          
