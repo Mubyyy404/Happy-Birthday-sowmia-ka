@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Your Bill - Raja Rice & Grocery</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<header>Raja Rice & Grocery - Get Bill</header>
+
+<div class="container">
+  <h3>Enter your Unique Order Code</h3>
+  <input type="text" id="enterCode" placeholder="Enter your unique code">
+  <button onclick="fetchBill()">Get Bill</button>
+  <p id="billStatus"></p>
+  <div id="billContainer" style="display:none;"></div>
+  <button id="downloadBtn" style="display:none;" onclick="downloadPDF()">Download Bill as PDF</button>
+</div>
+
+<script src="script.js"></script>
+<script src="bill.js"></script>
+
+</body>
+</html>
