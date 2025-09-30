@@ -22,5 +22,3 @@ footer{background:#388e3c;color:#fff;text-align:center;padding:15px;margin-top:2
 #cartContent button.close{position:absolute;top:10px;right:10px;background:#388e3c;color:#fff;border:none;padding:5px 10px;border-radius:10px;cursor:pointer;}
 #cartContent button.close:hover{background:#66bb6a;}
 #totalAmount{font-weight:bold;font-size:1.1em;text-align:right;margin-top:10px;}
-#get-bill input{padding:10px;width:70%;margin-right:10px;}
-                          
