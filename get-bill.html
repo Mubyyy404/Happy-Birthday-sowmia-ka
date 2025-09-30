@@ -6,6 +6,7 @@
 <title>Get Your Bill - Raja Rice & Grocery</title>
 <link rel="stylesheet" href="style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -16,10 +17,7 @@
   <input type="text" id="enterCode" placeholder="Enter your unique code">
   <button onclick="fetchBill()">Get Bill</button>
   <p id="billStatus"></p>
-
-  <!-- bill content -->
-  <div id="bill" style="display:none;"></div>
-
+  <div id="billContainer" style="display:none;"></div>
   <button id="downloadBtn" style="display:none;" onclick="downloadPDF()">Download Bill as PDF</button>
 </div>
 
