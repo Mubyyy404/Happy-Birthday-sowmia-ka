@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Raja Rice & Grocery</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raja Rice & Grocery</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -18,7 +18,6 @@
 </nav>
 
 <div class="container" id="productContainer">
-  <!-- Sample products -->
   <div class="card" data-name="Basmati Rice" data-price="500">
     <img src="https://via.placeholder.com/250x200.png?text=Rice" alt="Rice">
     <h3>Basmati Rice</h3>
@@ -51,8 +50,8 @@
     <p id="totalAmount"></p>
 
     <h3>Select Payment Method</h3>
-    <label><input type="radio" name="payment" value="UPI"> UPI</label>
-    <label><input type="radio" name="payment" value="COD"> Cash on Delivery</label>
+    <label><input type="radio" name="payment" value="UPI" onclick="showPayment('UPI')"> UPI</label>
+    <label><input type="radio" name="payment" value="COD" onclick="showPayment('COD')"> Cash on Delivery</label>
 
     <div id="upiSection" style="display:none;">
       <p>Your unique order code: <input type="text" id="orderCode" readonly></p>
@@ -65,15 +64,6 @@
       <p>Send this code to admin for approval to get your bill.</p>
     </div>
   </div>
-</div>
-
-<!-- Offer Popup -->
-<div id="offerPopup" style="display:none; position:fixed; top:20%; left:50%; 
-transform:translateX(-50%); background:#fff; padding:20px; border-radius:10px; 
-box-shadow:0 4px 12px rgba(0,0,0,.3); z-index:3000;">
-  <h3>🎉 Special Offer</h3>
-  <p>Get 10% off on orders above ₹1000!</p>
-  <button onclick="closeOffer()">Close</button>
 </div>
 
 <div id="contactSection">
