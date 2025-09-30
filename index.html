@@ -6,6 +6,7 @@
 <title>Raja Rice & Grocery</title>
 <link rel="stylesheet" href="style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -50,8 +51,8 @@
     <p id="totalAmount"></p>
 
     <h3>Select Payment Method</h3>
-    <label><input type="radio" name="payment" value="UPI" onclick="showPayment('UPI')"> UPI</label>
-    <label><input type="radio" name="payment" value="COD" onclick="showPayment('COD')"> Cash on Delivery</label>
+    <label><input type="radio" name="payment" value="UPI"> UPI</label>
+    <label><input type="radio" name="payment" value="COD"> Cash on Delivery</label>
 
     <div id="upiSection" style="display:none;">
       <p>Your unique order code: <input type="text" id="orderCode" readonly></p>
@@ -64,13 +65,6 @@
       <p>Send this code to admin for approval to get your bill.</p>
     </div>
   </div>
-</div>
-
-<div id="contactSection">
-  <h3>Contact Us</h3>
-  <p>Phone: +91-9876543210</p>
-  <p>Email: support@rajaricegrocery.com</p>
-  <p>Address: 123 Market Street, Your City, India</p>
 </div>
 
 <footer>&copy; 2025 Raja Rice & Grocery. All Rights Reserved.</footer>
