@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Approval</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Approval</title>
 </head>
 <body>
 <h2>Approve Orders</h2>
@@ -12,14 +12,13 @@
 <p id="status"></p>
 
 <script>
-let approvedCodes = []; // You can save this to data/approvedCodes.json if hosting static site manually
-
 function approveOrder(){
   const code=document.getElementById('approveCode').value.trim();
   if(code){
+    let approvedCodes = JSON.parse(localStorage.getItem("approvedCodes")) || [];
     approvedCodes.push(code);
-    document.getElementById('status').innerText=`Order ${code} approved! Add this code to frontend approvedCodes array.`;
-    console.log(approvedCodes);
+    localStorage.setItem("approvedCodes", JSON.stringify(approvedCodes));
+    document.getElementById('status').innerText=`✅ Order ${code} approved!`;
   }
 }
 </script>
